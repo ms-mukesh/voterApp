@@ -33,8 +33,8 @@ export const Api = async (endpoint, method, data = null) => {
   // let baseurl = 'https://voter-app-for-apk1.herokuapp.com/';//apk-2
   // let baseurl = 'https://testing-app-for-apk3.herokuapp.com/';//apk-3
   // let baseurl = 'http://192.168.0.2:3000/';
-  // let baseurl = 'http://139.59.1.188:3000/';//--digitalOcean URL
-  let baseurl = 'http://192.168.0.2:3000/';
+  let baseurl = 'http://139.59.1.188:3000/';//--digitalOcean URL
+  // let baseurl = 'http://192.168.0.2:3000/';
 
   let url = baseurl + endpoint;
   // checkConnectivity().then((res)=>{
