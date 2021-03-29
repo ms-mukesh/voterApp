@@ -17,6 +17,7 @@ frontend:
     build:
       commands:
         - 'expo build:web'
+        -  amplifyPush
   artifacts:
     baseDirectory: web-build
     files:
