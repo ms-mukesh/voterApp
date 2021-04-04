@@ -3,7 +3,7 @@ import {View, Text, TouchableWithoutFeedback, StyleSheet, TouchableHighlight, Im
 import {AppHeader, GoBackHeader, Loading} from "../common";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllVolunteer} from "../../redux/actions/eventActions";
-import {color, hp, isANDROID, normalize, wp} from "../../helper/themeHelper";
+import {color, hp, isANDROID, IsAndroidOS, IsIOSOS, normalize, wp} from "../../helper/themeHelper";
 import {SwipeListView} from "react-native-swipe-list-view";
 import {shadowStyle} from "../../helper/styles";
 import {IS_OUR_ENFLUENCER} from "../../helper/constant";
@@ -63,7 +63,7 @@ const VolunteerRequestChangesStatus = props => {
                 displayDetailPage(index)
             }}>
             <View style={{flex: 1, marginBottom: hp(1)}}>
-                <View style={[style.mainView,{width:wp(40)}]}>
+                <View style={[style.mainView,{width:(IsIOSOS || IsAndroidOS)?wp(90):wp(40)}]}>
                     {item?.IsInfluencer === IS_OUR_ENFLUENCER &&
                     <View
                         style={{
@@ -280,7 +280,7 @@ const VolunteerRequestChangesStatus = props => {
                 :
                 <FlatList
                     directionalDistanceChangeThreshold={10}
-                    numColumns={2}
+                    numColumns={(IsIOSOS || IsAndroidOS)?1:2}
                     useFlatList={true}
                     listViewRef={flatlistRef}
                     data={volunteerChanges}

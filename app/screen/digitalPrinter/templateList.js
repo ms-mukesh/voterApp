@@ -18,27 +18,29 @@ const TemplateListScreen = props => {
        })
     },[])
     const navigateToTemplateDetail = (message,templateName,templateImage,categoryId) =>{
-        Alert.alert(
-            message,
-            'We hope you are available with these contents!',
-            [
-                {
-                    text: 'NO',
-                    onPress: () => {
-                        console.log('ok');
-                    },
-                },
-                {
-                text: 'Yes',
-                onPress: async () => {
-                    props.navigation.navigate('TemplateDetailScreen',{templateTitle:templateName,templateImage:templateImage,categoryId:categoryId})
-                },
-            },
-            ],
-            {
-                cancelable: false,
-            }
-        );
+        alert(message)
+        props.navigation.navigate('TemplateDetailScreen',{templateTitle:templateName,templateImage:templateImage,categoryId:categoryId})
+        // Alert.alert(
+        //     message,
+        //     'We hope you are available with these contents!',
+        //     [
+        //         {
+        //             text: 'NO',
+        //             onPress: () => {
+        //                 console.log('ok');
+        //             },
+        //         },
+        //         {
+        //         text: 'Yes',
+        //         onPress: async () => {
+        //             props.navigation.navigate('TemplateDetailScreen',{templateTitle:templateName,templateImage:templateImage,categoryId:categoryId})
+        //         },
+        //     },
+        //     ],
+        //     {
+        //         cancelable: false,
+        //     }
+        // );
     }
     const renderTemplateList = ({item, index}) => {
         console.log(item)

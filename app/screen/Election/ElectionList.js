@@ -3,7 +3,7 @@ import {View, Text, TouchableWithoutFeedback, StyleSheet, TouchableOpacity,Linki
 import {AppHeader, Loading} from "../common";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllVolunteer} from "../../redux/actions/eventActions";
-import {color, hp, isANDROID, normalize, wp} from "../../helper/themeHelper";
+import {color, hp, isANDROID, IsAndroidOS, IsIOSOS, normalize, wp} from "../../helper/themeHelper";
 import {SwipeListView} from "react-native-swipe-list-view";
 import {shadowStyle} from "../../helper/styles";
 import moment from "../home/dashboard";
@@ -88,8 +88,8 @@ const MyVolunteerListToAllocateElection = props => {
     const _RenderItem = (item, index) => {
         return (
             <TouchableWithoutFeedback onPress={()=>{displayDetailPage(index)}}>
-                <View style={{flex: 1, marginBottom: hp(1),width:wp(50)}}>
-                    <View style={[style.mainView,{width:wp(40)}]}>
+                <View style={{flex: 1, marginBottom: hp(1)}}>
+                    <View style={[style.mainView,{width:(IsIOSOS || IsAndroidOS)?wp(90):wp(40)}]}>
                         <View style={{flex: 1, flexDirection: 'row'}}>
                             <View style={{alignItems: 'center', justifyContent: 'center'}}>
                                 {typeof item.ProfileImage === 'undefined' ||
@@ -276,7 +276,7 @@ const MyVolunteerListToAllocateElection = props => {
                 horizontal={false}
                 showsHorizontalScrollIndicator={false}
                 extraData={{...props}}
-                numColumns={2}
+                numColumns={(IsIOSOS || IsAndroidOS)?1:2}
                 onEndReachedThreshold={0.01}
                 onRowOpen={(rowKey, rowMap) => {
                     openRowRef = rowMap[rowKey];

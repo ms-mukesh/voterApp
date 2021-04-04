@@ -120,11 +120,11 @@ const style = StyleSheet.create({
   container: {
     position: 'absolute',
     top: 0,
-    bottom: 0,
+    bottom: hp(50),
     right: 0,
     left: 0,
     zIndex: 1000,
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
   label: {

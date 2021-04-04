@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {cross_black_icon} from "../../assets/images";
 // import RangeSlider from 'rn-range-slider';
 import RangeSlider, { Slider } from 'react-native-range-slider-expo';
-import {color, font, hp, isANDROID, normalize, wp} from '../../helper/themeHelper';
+import {color, font, hp, isANDROID, IsAndroidOS, IsIOSOS, normalize, wp} from '../../helper/themeHelper';
 import DatePickerModel from '../common/DatePickerModelForEdit';
 // import {createSortingObject} from '../../functions';
 import {
@@ -516,7 +516,7 @@ const FilterPage = props => {
           ref={reference === null ? flatListRef : reference}
           horizontal={true}
           data={dataArray}
-          showsVerticalScrollIndicator={false}
+          showsVerticalScrollIndicator={true}
           initialScrollIndex={selectedIndex}
           getItemLayout={(data, index) => getItemLayout(data, index)}
           renderItem={({item, index}) => (
@@ -803,7 +803,6 @@ const FilterPage = props => {
 
             <View style={{flex: 1, marginTop: hp(1.3)}}>
               <View style={{flex: 1}}>
-                <View style={backLine} />
                 <CustomText style={headerText}>{'  SELECT AGE  '}</CustomText>
               </View>
 
@@ -940,7 +939,7 @@ const style = StyleSheet.create({
   },
   buttonStyle: {
     height: hp(6),
-    width: wp(15),
+    width: (IsIOSOS || IsAndroidOS)?wp(22):wp(15),
     backgroundColor: color.blue,
     marginTop: hp(1),
     alignItems: 'center',

@@ -171,6 +171,27 @@ export const insertBulkData = data => {
             });
     };
 };
+export const insertBulkDataFromWeb = data => {
+    return dispatch => {
+        dispatch({type: LOADING, payload: true});
+        return Api('userActions/addBulkDataFromWeb', 'post', data)
+            .then(async res => {
+                dispatch({type: LOADING, payload: false});
+                if (!res) {
+                    console.log('unauthorized Acesss');
+                } else if (res.status === 200) {
+                    return Promise.resolve(true);
+                } else if (res.status >= 201) {
+                    alert(res.data.data);
+                    return Promise.resolve(false);
+                }
+            })
+            .catch(err => {
+                dispatch({type: LOADING, payload: false});
+                console.log(err);
+            });
+    };
+};
 
 export const fetchTemplateCategory = () => {
     return dispatch => {

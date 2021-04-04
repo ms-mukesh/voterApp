@@ -12,7 +12,7 @@ const App = () => {
     // console.disableYellowBox = true;
     return (
             <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
-                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen initialParams={{ fromDashBoard: false }} name="Home" component={Home} />
                 <Stack.Screen name="MemberDetails" component={MemberDetails} />
                 <Stack.Screen name="FilterPage" component={FilterPage} />
             </Stack.Navigator>

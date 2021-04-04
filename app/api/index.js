@@ -4,21 +4,9 @@ import {checkConnectivity} from "../screen/functions";
 import {Alert} from "react-native";
 import {EventRegister} from "react-native-event-listeners";
 const setUnauthorizedUser = async message => {
-  return Alert.alert(
-      'Not Authorized',
-      "Opps!May be you are not authorized with app...can you please login again?..",
-      [
-        {
-          text: 'Okay',
-          onPress: () => {
-            EventRegister.emit('forceLogoutEvent');
-          },
-        },
-      ],
-      {
-        cancelable: false,
-      }
-  );
+    alert("Opps!May be you are not authorized with app...can you please login again?..")
+    EventRegister.emit('forceLogoutEvent');
+    return true
 };
 
 export const Api = async (endpoint, method, data = null) => {

@@ -2,13 +2,14 @@ import React,{useEffect} from 'react';
 import {View,Text,StyleSheet,FlatList,TouchableOpacity,Image} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import {AppHeader, Loading} from "../common";
-import {hp, wp, normalize, color, isWEB} from "../../helper/themeHelper";
+import {hp, wp, normalize, color, isWEB, IsIOSOS, IsAndroidOS} from "../../helper/themeHelper";
 import {
+    allocate_task_color,
     broadcast_notifiction_icon_color, change_pwd_icon_color,
-    election_icon_color, notifiction_icon_color,
+    election_icon_color, event_calender_color, family_tree_color, influencer_color_icon, notifiction_icon_color,
     survey_list_icon_color,
     volunteer_icon,
-    volunteer_list_icon_color,
+    volunteer_list_icon_color, volunteer_request_color,
     voter_list_icon,
     voter_list_icon_color
 } from "../../assets/images";
@@ -33,6 +34,10 @@ const HomeScreenItemsForAdmin =
         {"name":"Election List","pageUrl":"Election","iconUrl":election_icon_color},
         {"name":"Broadcast Notification","pageUrl":"BroadcastNotification","iconUrl":broadcast_notifiction_icon_color},
         {"name":"My Notifications","pageUrl":"Notification","iconUrl":notifiction_icon_color},
+        {"name":"Family Tree","pageUrl":"FamilyTreeScreen","iconUrl":family_tree_color},
+        {"name":"Event Calender","pageUrl":"EventCalender","iconUrl":event_calender_color},
+        {"name":"Allocate Task","pageUrl":"AllocateTask","iconUrl":allocate_task_color},
+        {"name":"My Incluencers","pageUrl":"IncluencerList","iconUrl":influencer_color_icon},
         {"name":"Change Password","pageUrl":"ChangePassword","iconUrl":change_pwd_icon_color},
 
     ]
@@ -59,7 +64,7 @@ const Dashboard = props => {
             <View key={Math.random() + 'DE'} style={style.mainView}>
                 <TouchableOpacity
                     onPress={() => {
-                        props.navigation.navigate(item?.pageUrl)
+                        props.navigation.navigate(item?.pageUrl,{fromDashBoard:true})
                     }}
                 >
                     <Image resizeMode={'contain'} style={style.iconImage} source={item?.iconUrl} />
@@ -82,7 +87,7 @@ const Dashboard = props => {
                 }}
             />
             <FlatList
-                numColumns={isWEB?3:2}
+                numColumns={(IsIOSOS || IsAndroidOS)?3:3}
                 horizontal={false}
                 data={userDetails.role===ADMIN ? HomeScreenItemsForAdmin:HomeScreenItemsForVolunteer}
                 // data={HomeScreenItemsForAdmin}
@@ -97,8 +102,8 @@ const Dashboard = props => {
 };
 const style = StyleSheet.create({
     iconImage: {
-        height: hp(20),
-        width: wp(20),
+        height: hp(18),
+        width: wp(18),
         borderRadius: hp(2),
     },
     mainView: {

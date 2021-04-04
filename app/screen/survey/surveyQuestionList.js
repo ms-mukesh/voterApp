@@ -2,7 +2,7 @@ import React,{useEffect,useState,useRef} from 'react';
 import {View, Text, TouchableWithoutFeedback, StyleSheet,Modal, TouchableHighlight, Image,Linking,FlatList} from 'react-native';
 import {AppButton, AppHeader, FloatingLabel, GoBackHeader, LabelInputText, Loading} from "../common";
 import {useDispatch, useSelector} from "react-redux";
-import {color, hp, isANDROID, normalize, wp} from "../../helper/themeHelper";
+import {color, hp, isANDROID, IsAndroidOS, IsIOSOS, normalize, wp} from "../../helper/themeHelper";
 import {shadowStyle} from "../../helper/styles";
 import moment from 'moment'
 import {addNewSurveyQuestion, fetchSurveyList, getSurveyQuestionList} from "../../redux/actions/surveyAction";
@@ -156,6 +156,7 @@ const SurveyQuestionList = props => {
                 visible={true}>
                 <View style={{
                     flex: 1,
+                    width:wp(60),
                     // alignItems: 'center',
                     justifyContent: 'center',
                     backgroundColor: 'rgba(14,14,14,0.85)'
@@ -164,7 +165,7 @@ const SurveyQuestionList = props => {
                         // let dateDiff = moment(electionDateforDiff).diff(todayDate, 'days');
                         setAddNewQuestionFlag(false)
                     }}>
-                        <Image source={cross_black_icon} style={[{height: wp(6),width:wp(6)}]}/>
+                        <Image source={cross_black_icon} style={[{height: wp(1),width:wp(1)}]}/>
                     </TouchableWithoutFeedback>
                     <View style={[style.groupView]}>
                         <View style={[style.innerView]}>
@@ -188,7 +189,7 @@ const SurveyQuestionList = props => {
                             )}
                         </View>
                     </View>
-                    <AppButton onPress={()=>{addNewQuestionToDb()}} containerStyle={{marginTop:hp(2)}} title={'Add New Question'}/>
+                    <AppButton onPress={()=>{addNewQuestionToDb()}} containerStyle={{marginTop:hp(2),width:(IsIOSOS || IsAndroidOS)?wp(60):wp(30)}} title={'Add New Question'}/>
 
                 </View>
             </Modal>
@@ -203,7 +204,7 @@ const SurveyQuestionList = props => {
                 } else {
                     setAddNewQuestionFlag(true)
                 }
-            }} containerStyle={{marginTop:hp(2),backgroundColor:'#ff6d5e'}} title={'Add New Question'}/>
+            }} containerStyle={{marginTop:hp(2),backgroundColor:'#ff6d5e',width:wp(35)}} title={'Add New Question'}/>
             <FlatList
                 data={surveyQuestionList}
                 keyExtractor={(item, index) => index.toString()}

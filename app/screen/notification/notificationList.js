@@ -17,8 +17,8 @@ import {
   color,
   font,
   hp,
-  isANDROID,
-  isIOS,
+  isANDROID, IsAndroidOS,
+  isIOS, IsIOSOS,
   normalize,
   screenWidth,
   wp,
@@ -700,7 +700,7 @@ const NotificationList = props => {
               <View style={{flex: 1}}>
                 <View style={{flex: 1}}>
                   <FlatList
-                      numColumns={2}
+                      numColumns={(IsIOSOS || IsAndroidOS)?1:2}
                     directionalDistanceChangeThreshold={10}
                     useFlatList={true}
                     listViewRef={flatlistRef}
@@ -931,7 +931,7 @@ const style = StyleSheet.create({
   },
   viewCard: {
     flex: 1,
-    width:wp(40),
+    width:(IsIOSOS || IsAndroidOS)?wp(90):wp(40),
     paddingVertical: hp(0.5),
     paddingHorizontal: wp(1),
     borderRadius: wp(2),

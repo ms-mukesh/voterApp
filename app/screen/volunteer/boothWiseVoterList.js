@@ -106,7 +106,7 @@ const BoothWiseVoterList = props => {
                 displayDetailPage(index)
             }}>
             <View style={{flex: 1, marginBottom: hp(1)}}>
-                <View style={[style.mainView,{width:wp(40)}]}>
+                <View style={[style.mainView,{width:(IsIOSOS || IsAndroidOS)?wp(90):wp(40)}]}>
                     {item?.IsInfluencer === IS_OUR_ENFLUENCER &&
                     <View
                         style={{
@@ -308,7 +308,7 @@ const BoothWiseVoterList = props => {
             )}
             {isLoading && <Loading isLoading={isLoading} />}
             <FlatList
-                numColumns={2}
+                numColumns={(IsIOSOS || IsAndroidOS)?1:2}
                 directionalDistanceChangeThreshold={10}
                 useFlatList={true}
                 listViewRef={flatlistRef}

@@ -11,7 +11,7 @@ import {CommonActions} from '@react-navigation/native';
 
 const defaultEvent = {
     eventName : '',
-    eventDate : new Date(),
+    eventDate : '',
     address:'',
     guest:'',
     organizer:'',
@@ -70,7 +70,7 @@ const CreateNewEventScreen = props => {
         let tempObj = {
             taskTitle:'',
             taskDescription : '',
-            taskDate : new Date()
+            taskDate : ''
         }
         tempArrayForTaskList.push(tempObj);
         await setTaskData(tempArrayForTaskList)

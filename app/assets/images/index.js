@@ -5,8 +5,8 @@ export const password_icon = require('./password.png')
 export const help_icon = require('./information.png')
 export const logut_icon = require('./logout.png')
 export const printer_icon = require('./printer.png')
-export const back_arrow_icon = require('./left-arrow.png')
-export const cross_black_icon = require('./cross_black.png')
+export const back_arrow_icon = require('./back-arrow-red.png')
+export const cross_black_icon = require('./cross-red.png')
 export const add_user_icon = require('./add-user.png')
 export const search_icon = require('./loupe.png')
 export const up_arrow = require('./up-arrow.png')
@@ -15,7 +15,7 @@ export const calender_icon = require('./calendar.png')
 export const location_pin_icon = require('./placeholder.png')
 export const voter_raising = require('./raise-hand.png')
 export const sort_icon = require('./sort-by-attributes.png')
-export const filter_icon = require('./filter-filled-tool-symbol.png')
+export const filter_icon = require('./filter.png')
 export const export_icon = require('./export.png')
 export const password_hide = require('./passwordHide.png')
 export const password_show = require('./passwordShow.png')
@@ -60,6 +60,11 @@ export const survey_list_drawer = require("./survey_drawer.png");
 export const influnecer_icon = require("./influncer.png");
 export const empty_star = require("./star_empty.png");
 export const filled_start = require("./star_filled.png");
+export const family_tree_color = require("./family-tree-color.png");
+export const event_calender_color = require("./calendar-color.png");
+export const volunteer_request_color = require("./volunteer-request.png");
+export const allocate_task_color = require("./allocate-task.png");
+export const influencer_color_icon = require("./incluencer-color.png");
 
 
 

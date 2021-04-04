@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {AppButton, AppHeader, Loading} from "../../common";
 
-import {color, font, hp, isANDROID, isIOS, normalize, wp} from "../../../helper/themeHelper";
+import {color, font, hp, isANDROID, IsAndroidOS, isIOS, IsIOSOS, normalize, wp} from "../../../helper/themeHelper";
 import {shadowStyle} from "../../../helper/styles";
 import {SwipeListView} from "react-native-swipe-list-view";
 import moment from "moment";
@@ -81,7 +81,7 @@ const VoterWhoNotGaveVoteScreen = props => {
                 // displayDetailPage(index)
             }}>
                 <View style={{flex: 1, marginBottom: hp(1)}}>
-                    <View style={[style.mainView,{width:wp(45)}]}>
+                    <View style={[style.mainView,{width:(IsIOSOS || IsAndroidOS)?wp(90):wp(45)}]}>
                         {item?.IsInfluencer === IS_OUR_ENFLUENCER &&
                         <View
                             style={{
@@ -161,7 +161,7 @@ const VoterWhoNotGaveVoteScreen = props => {
                                                 }
                                         })
                                     }}>
-                                    <View style={{alignItems:'center',justifyContent:'center',height:hp(5),width:wp(20),borderRadius:hp(1.5),backgroundColor:color.lightGreen}}>
+                                    <View style={{alignItems:'center',justifyContent:'center',height:hp(5),width:(IsIOSOS || IsAndroidOS)?wp(40):wp(20),borderRadius:hp(1.5),backgroundColor:color.lightGreen}}>
                                         <Text style={{fontSize:normalize(12),fontWeight:'700'}}>{'Mark as voted'}</Text>
                                     </View>
                                     </TouchableWithoutFeedback>
@@ -291,7 +291,7 @@ const VoterWhoNotGaveVoteScreen = props => {
                 directionalDistanceChangeThreshold={10}
                 listViewRef={flatlistRef}
                 data={voterWhoDoesNotVote}
-                numColumns={2}
+                numColumns={(IsIOSOS || IsAndroidOS)?1:2}
                 keyExtractor={(item, index) => index.toString()}
                 recalculateHiddenLayout={true}
                 renderItem={({item, index}) => _RenderItem(item, index)}

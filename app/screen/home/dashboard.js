@@ -12,9 +12,18 @@ import {
     Modal, ActivityIndicator, FlatList,Linking,
     SafeAreaView
 } from 'react-native';
-import {AppButton, AppHeader, BoothListModel, FamilyListModel, FloatingLabel, LabelInputText, Loading} from "../common";
+import {
+    AppButton,
+    AppHeader,
+    BoothListModel,
+    FamilyListModel,
+    FloatingLabel,
+    GoBackHeader,
+    LabelInputText,
+    Loading
+} from "../common";
 import CloseButton from "../common/ClearButton";
-import {color, font, hp, isANDROID, isIOS, isWEB, normalize, wp} from "../../helper/themeHelper";
+import {color, font, hp, isANDROID, IsAndroidOS, isIOS, IsIOSOS, isWEB, normalize, wp} from "../../helper/themeHelper";
 import {center, shadowStyle} from "../../helper/styles";
 import {SwipeListView} from "react-native-swipe-list-view";
 import moment from "moment";
@@ -46,18 +55,20 @@ import {exportFile, isDefined} from "../functions";
 import * as Permissions from 'expo-permissions';
 import {usePermissions} from "expo-permissions";
 import * as Print from "expo-print";
-import {insertBulkData} from "../../redux/actions/userActions";
+import {insertBulkData, insertBulkDataFromWeb} from "../../redux/actions/userActions";
 import {
     fetchVolunteerTask,
     insertVoterDataChangeRequest,
     updateTaskInformation
 } from "../../redux/actions/volunteerAction";
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
-import {uriToBlob} from "../../helper/firebaseUploadFunctions";
+import {uploadExcelOnFirebase, uploadPdfOnFirebase, uriToBlob} from "../../helper/firebaseUploadFunctions";
 
 
 const Dashboard = props => {
     let currentBoothIdFoVoters = 1;
+    const {fromDashBoard = false} = props?.route?.params
+    console.log("params--",props?.route?.params)
     const defaultBoothDetail = {
         name:'',
         state:'',
@@ -81,6 +92,7 @@ const Dashboard = props => {
     const [filterData, setFilterData] = useState([]);
     const [boothList,setBoothList] = useState([]);
     const [wardDetail,setWardDetail] = useState(defaultBoothDetail)
+
     const setFilter = value => {
         setCurrentFilter(value);
     };
@@ -746,64 +758,83 @@ const Dashboard = props => {
             // type: "text/csv" // .csv
         });
         console.log("result--",result)
-        let csvData = []
-        if(result){
-            await FileSystem.readAsStringAsync(result?.uri,{encoding:'base64'}).then(b64 => XLSX.read(b64, {type: "base64"})).then(wb => { csvData = XLSX.utils.sheet_to_json(wb?.Sheets.Sheet1) });
-            // await FileSystem.readAsStringAsync(result?.uri,{encoding:'base64',length:30540745,position: 2147483648}).then((data)=>{
-            //     console.log("data---",data)
-            // })
-            console.log("csv data--",csvData)
-            if(csvData.length>0){
-                console.log("csv data--",csvData)
-                if(isDefined(csvData[0].AcNameEn) && isDefined(csvData[0].PollingAddressEn) && isDefined(csvData[0].Age) && isDefined(csvData[0].SectionNameEn) &&
-                    isDefined(csvData[0].PartNameEn) && isDefined(csvData[0].RelationName)  && isDefined(csvData[0].RelayionType) && isDefined(csvData[0].Sex)
-                    && isDefined(csvData[0].SectionNo) && isDefined(csvData[0].VoterId) && isDefined(csvData[0].VoterNameEn) && isDefined(csvData[0].VoterName)
-                ){
-                    await setExcelData([...csvData])
-                    dispatch(insertBulkData({csvData:csvData.slice(0,50)})).then((res)=>{
-                        getData()
-                        if(res){
-                            Alert.alert(
-                                '',
-                                'Voter Added to List',
-                                [
-                                    {
-                                        text: 'OK',
-                                        onPress: () => {
-                                            console.log('ok');
-                                        },
-                                    },
-
-                                ],
-                                {
-                                    cancelable: true,
-                                }
-                            );
+        dispatch(setLoaderStatus(true))
+        alert("please wait for a while....we are adding your data....thank you")
+        uploadExcelOnFirebase(result?.uri).then((res)=>{
+            console.log(res)
+            if(res){
+                dispatch(insertBulkDataFromWeb({
+                    fileUrl:res
+                })).then((isDataInserted)=>{
+                        if(isDataInserted){
+                            alert("Data is Added...!")
+                        } else {
+                            alert("Failed To Add Data...!")
                         }
-                    }).catch((err)=>{
-                        console.log(err)
-
-                    })
-                    // setExcelItemPreviewFlag(true)
-                    // await setExcelData([...csvData])
-                    // dispatch(insertBulkData({csvData:csvData})).then((res)=>{
-                    //     if(res){
-                    //         alert("added data")
-                    //     }
-                    // })
-                } else {
-                    alert("invalid excel file ")
-                    dispatch(setLoaderStatus(false))
-                }
-            } else {
-                alert("not able to fetch data from excel file")
-                dispatch(setLoaderStatus(false))
+                })
             }
-
-        } else {
-            alert("Fail to upload file's data")
             dispatch(setLoaderStatus(false))
-        }
+        }).catch((err)=>{
+            dispatch(setLoaderStatus(false))
+        })
+        let csvData = []
+        // if(result){
+        //     await FileSystem.readAsStringAsync(result?.uri,{encoding:'base64'}).then(b64 => XLSX.read(b64, {type: "base64"})).then(wb => { csvData = XLSX.utils.sheet_to_json(wb?.Sheets.Sheet1) });
+        //     // await FileSystem.readAsStringAsync(result?.uri,{encoding:'base64',length:30540745,position: 2147483648}).then((data)=>{
+        //     //     console.log("data---",data)
+        //     // })
+        //     console.log("csv data--",csvData)
+        //     if(csvData.length>0){
+        //         console.log("csv data--",csvData)
+        //         if(isDefined(csvData[0].AcNameEn) && isDefined(csvData[0].PollingAddressEn) && isDefined(csvData[0].Age) && isDefined(csvData[0].SectionNameEn) &&
+        //             isDefined(csvData[0].PartNameEn) && isDefined(csvData[0].RelationName)  && isDefined(csvData[0].RelayionType) && isDefined(csvData[0].Sex)
+        //             && isDefined(csvData[0].SectionNo) && isDefined(csvData[0].VoterId) && isDefined(csvData[0].VoterNameEn) && isDefined(csvData[0].VoterName)
+        //         ){
+        //             await setExcelData([...csvData])
+        //             dispatch(insertBulkData({csvData:csvData.slice(0,50)})).then((res)=>{
+        //                 getData()
+        //                 if(res){
+        //                     Alert.alert(
+        //                         '',
+        //                         'Voter Added to List',
+        //                         [
+        //                             {
+        //                                 text: 'OK',
+        //                                 onPress: () => {
+        //                                     console.log('ok');
+        //                                 },
+        //                             },
+        //
+        //                         ],
+        //                         {
+        //                             cancelable: true,
+        //                         }
+        //                     );
+        //                 }
+        //             }).catch((err)=>{
+        //                 console.log(err)
+        //
+        //             })
+        //             // setExcelItemPreviewFlag(true)
+        //             // await setExcelData([...csvData])
+        //             // dispatch(insertBulkData({csvData:csvData})).then((res)=>{
+        //             //     if(res){
+        //             //         alert("added data")
+        //             //     }
+        //             // })
+        //         } else {
+        //             alert("invalid excel file ")
+        //             dispatch(setLoaderStatus(false))
+        //         }
+        //     } else {
+        //         alert("not able to fetch data from excel file")
+        //         dispatch(setLoaderStatus(false))
+        //     }
+        //
+        // } else {
+        //     alert("Fail to upload file's data")
+        //     dispatch(setLoaderStatus(false))
+        // }
     }
     const changeUserInfluncerStatus = (voterId,status) =>{
         if(isDefined(voterId) && isDefined(status)){
@@ -1017,7 +1048,7 @@ const Dashboard = props => {
                 displayDetailPage(index)
             }}>
                 <View style={{flex: 1, marginBottom: hp(1)}}>
-                    <View style={[style.mainView,{width:wp(30),marginLeft:index%3!==0?wp(3):0}]}>
+                    <View style={[style.mainView,{width:(IsIOSOS || IsAndroidOS)?wp(90):wp(30)}]}>
                         <View
                             style={{
                                 position: 'absolute',
@@ -1060,7 +1091,7 @@ const Dashboard = props => {
                                 )}
                             </View>
                             <View style={{flex: 1, justifyContent: 'space-between'}}>
-                                <Text numberOfLines={1} allowFontScaling={false} style={[style.fontStyle,{width:wp(65)}]}>
+                                <Text numberOfLines={2} allowFontScaling={false} style={[style.fontStyle,{width:wp(25)}]}>
                                     {/*{item.FirstName + ' ' + item.MiddleName + ' ' + item.LastName}*/}
                                     {item?.VoterHindiName !== null ?
                                         item?.FirstName + " / " + item?.VoterHindiName :item?.FirstName
@@ -1078,7 +1109,7 @@ const Dashboard = props => {
                                         <Text style={style.fontStyle}>{item?.VoterVotingId}</Text>
                                         }
                                     </View>
-                                    <View style={{alignItems:'center',justifyContent:'center',height:hp(4),width:wp(10),borderRadius:hp(1.5),backgroundColor:item?.TrustFactor?.Color??'transparent'}}>
+                                    <View style={{alignItems:'center',justifyContent:'center',height:hp(4),width:(IsIOSOS || IsAndroidOS)?wp(20):wp(10),borderRadius:hp(1.5),backgroundColor:item?.TrustFactor?.Color??'transparent'}}>
                                         <Text style={{fontSize:normalize(7),fontWeight:'700'}}>{item?.TrustFactor?.Name}</Text>
                                     </View>
                                 </View>
@@ -1227,13 +1258,36 @@ const Dashboard = props => {
     }
     return (
         <View style={{flex: 1 }}>
-            <AppHeader
-                title={'Dashboard'}
-                onMenuPress={() => {
-                    openDrawer();
-                }}
+            {/*<AppHeader*/}
+            {/*    title={'Dashboard'}*/}
+            {/*    onMenuPress={() => {*/}
+            {/*        openDrawer();*/}
+            {/*    }}*/}
+            {/*    onRightTitlePress={()=>{*/}
+            {/*        addNewVoters()*/}
+            {/*    }}*/}
+            {/*    onFilterIconPress={()=>{*/}
+            {/*        openFilterPage();*/}
+            {/*    }}*/}
 
-            />
+            {/*/>*/}
+            {!fromDashBoard ? <AppHeader
+                    title={'Dashboard'}
+                    onMenuPress={() => {
+                        openDrawer();
+                    }}
+                    onRightTitlePress={()=>{
+                        addNewVoters()
+                    }}
+                    onFilterIconPress={()=>{
+                        openFilterPage();
+                    }}
+
+                />:
+                <GoBackHeader title={'Dashboard'} onMenuPress={()=>{
+                    props.navigation.goBack()
+                }} />
+            }
             {isLoading && <Loading isLoading={isLoading} />}
             <View style={style.searchTextinput}>
                     <TextInput
@@ -1289,7 +1343,7 @@ const Dashboard = props => {
                         return {...x, key: index};
                     })
                 }
-                numColumns={3}
+                numColumns={(IsIOSOS || IsAndroidOS)?1:3}
                 keyExtractor={(item, index) => index.toString()}
                 recalculateHiddenLayout={true}
                 renderItem={({item, index}) => _RenderItemForWeb(item, index)}

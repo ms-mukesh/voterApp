@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {color, font, hp, isANDROID, isIOS, isWEB, normalize, wp} from '../../helper/themeHelper';
+import {color, font, hp, isANDROID, IsAndroidOS, isIOS, IsIOSOS, isWEB, normalize, wp} from '../../helper/themeHelper';
 import {
     AppButton,
     Background,
@@ -38,6 +38,7 @@ import {setUserDetails} from "../../redux/actions/userActions";
 import {setLoaderStatus} from "../../redux/actions/dashboardAction";
 import {validateEmail} from "../../helper/validation";
 import {TextInput} from "react-native-web";
+import {fetchAllTemplates} from "../../redux/actions/eventActions";
 
 
 const LoginScreen = props => {
@@ -54,7 +55,7 @@ const LoginScreen = props => {
     const isLoading = useSelector(state => state.appDefaultSettingReducer.isLoading);
     const [userdata, setUserData] = useState({
         mobile:temp,
-        password: '123456',
+        password: '',
         dob: '',
         dobForState: '',
         token: '',
@@ -62,7 +63,7 @@ const LoginScreen = props => {
         fromLogin: false,
         memberId: 0,
         deviceId: '',
-        email: 'admin1@gmail.com',
+        email: '',
     });
     const [isValidUserName, setUsernameState] = useState(true);
     const [isValidPwd, setIsValidPwd] = useState(true);
@@ -88,6 +89,8 @@ const LoginScreen = props => {
                         );
                     });
                     dispatch(setUserDetails(JSON.parse(res)));
+                    dispatch(fetchAllTemplates()).then((res)=>{
+                    })
                     props.navigation.dispatch(
                         CommonActions.reset({
                             index: 0,
@@ -107,7 +110,7 @@ const LoginScreen = props => {
     },[])
     const renderLoginView = () => {
         return (
-            <View style={{padding: wp(5)}}>
+            <View style={{padding: wp(8)}}>
                 <CustomText style={style.titleText}>{'Login' + ' '}</CustomText>
                 <View style={{marginTop: hp(2)}}>
                     <View
@@ -235,6 +238,8 @@ const LoginScreen = props => {
                                         })
                                     );
                                 });
+                                dispatch(fetchAllTemplates()).then((res)=>{
+                                })
                                 props.navigation.dispatch(
                                     CommonActions.reset({
                                         index: 0,
@@ -252,7 +257,7 @@ const LoginScreen = props => {
     };
     const renderLoginViewForWeb = () => {
         return (
-            <View style={{paddingLeft: wp(25),paddingRight:wp(25)}}>
+            <View style={{paddingLeft: wp(30),paddingRight:wp(30)}}>
                 <CustomText style={style.titleText}>{'Login' + ' '}</CustomText>
                 <View style={{marginTop: hp(2)}}>
                     <View
@@ -375,7 +380,7 @@ const LoginScreen = props => {
                 behavior={'position'}
                 enabled>
             <InitialHeader showAppIcon={true}/>
-            {isWEB?renderLoginViewForWeb():renderLoginView()}
+            {(isWEB && !IsIOSOS && !IsAndroidOS)?renderLoginViewForWeb():renderLoginView()}
             </KeyboardAwareScrollView>
         </View>
 

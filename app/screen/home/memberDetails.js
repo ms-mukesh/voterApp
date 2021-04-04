@@ -162,9 +162,9 @@ const DirectoryDetail = props => {
                         </View>
                         <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
                            <View style={{alignItems:'center',justifyContent:'center',marginTop:hp(1),height:isWEB?hp(6):hp(3),borderRadius:wp(5),width:isWEB?wp(20):wp(40),backgroundColor:data?.TrustFactor?.Color??'red'}}>
-                               <Text style={{fontSize:isWEB?normalize(12):normalize(16),fontWeight:'700'}}>{data?.TrustFactor?.Name??'AGAINST'}</Text>
+                               <Text style={{fontSize:normalize(10),fontWeight:'700'}}>{data?.TrustFactor?.Name??'AGAINST'}</Text>
                            </View>
-                            <Text style={{marginTop:hp(1),fontSize:isWEB?normalize(12):normalize(14),fontWeight:'500'}}>{data?.TrustFactor?.ExtraMessage??'AGAINST'}</Text>
+                            <Text style={{marginTop:hp(1),fontSize:normalize(8),fontWeight:'500'}}>{data?.TrustFactor?.ExtraMessage??'AGAINST'}</Text>
                         </View>
                         {/*<View style={{flexDirection: 'row'}}>*/}
                         {/*    {data?.FatherEntry !== null && (*/}
@@ -658,13 +658,13 @@ const DirectoryDetail = props => {
 const style = StyleSheet.create({
     fontStyle: {
         color: color.blue,
-        fontSize: normalize(16),
+        fontSize: normalize(12),
         textAlign: 'center',
         marginLeft: wp(1),
         fontWeight: 'bold',
     },
     subfontStyle: {
-        fontSize: normalize(13),
+        fontSize: normalize(10),
         fontFamily: font.robotoRegular,
         textAlign: 'left',
         marginLeft: wp(1),
@@ -687,7 +687,7 @@ const style = StyleSheet.create({
         marginLeft: wp(2),
     },
     detailFontStyle: {
-        fontSize: normalize(13),
+        fontSize: normalize(10),
         fontFamily: font.robotoRegular,
         marginLeft: wp(1),
     },
@@ -705,13 +705,13 @@ const style = StyleSheet.create({
     },
     subMainRowFontStyle: {
         color: color.blue,
-        fontSize: normalize(15),
+        fontSize: normalize(12),
         fontFamily: font.robotoRegular,
         // marginLeft: wp(4),
         // marginTop: hp(1),
     },
     subMainRowDetailFont: {
-        fontSize: normalize(12),
+        fontSize: normalize(10),
         fontFamily: font.robotoRegular,
         // marginLeft: wp(4),
         marginTop: hp(0.7),

@@ -304,12 +304,13 @@ export const DrawerContent = props => {
                 title: 'Event Calender',
                 urlToPage: 'EventCalender',
             },
+                // {
+                //     iconSource: create_event_icon,
+                //     icon: 'notifications-none',
+                //     title: 'Create Event',
+                //     urlToPage: 'CreateNewEventScreen',
+                // },
                 {
-                    iconSource: create_event_icon,
-                    icon: 'notifications-none',
-                    title: 'Create Event',
-                    urlToPage: 'CreateNewEventScreen',
-                }, {
                     iconSource: task_name_icon,
                     icon: 'notifications-none',
                     title: 'Allocate Task',
@@ -558,7 +559,7 @@ export const DrawerContent = props => {
                     });
                 } else {
                     dispatch(setCurrentDrawerIndex(data?.index))
-                    props.navigation.navigate(urlToPage);
+                    props.navigation.navigate(urlToPage,{fromDashBoard:false});
                 }
             }
 
@@ -584,7 +585,7 @@ export const DrawerContent = props => {
                     <TouchableOpacity onPress={()=>{
                         setEventExpanded(!eventExpanded)
                     }}>
-                        <Image source={rightIconSource} style={{height: hp(2.5), width: hp(2.5),marginLeft: wp(24)}}/>
+                        <Image source={rightIconSource} style={{height: hp(2.5), width: hp(2.5),marginLeft: wp(10.5)}}/>
                     </TouchableOpacity>
                     }
 
@@ -592,7 +593,7 @@ export const DrawerContent = props => {
                     <TouchableOpacity onPress={()=>{
                         setPrinterExpanded(!printerExpanded)
                     }}>
-                        <Image source={rightIconSourceForPrinter} style={{height: hp(2.5), width: hp(2.5),marginLeft: wp(10)}}/>
+                        <Image source={rightIconSourceForPrinter} style={{height: hp(2.5), width: hp(2.5),marginLeft: wp(6)}}/>
                     </TouchableOpacity>
                     }
                 </TouchableOpacity>
@@ -686,9 +687,9 @@ const style = StyleSheet.create({
     },
     rowText: {
         color: color.blue,
-        fontSize: normalize(14),
-        fontFamily: font.robotoRegular,
-        marginLeft: wp(5),
+        fontSize: normalize(9),
+        marginLeft: wp(1),
+        fontWeight:'700'
     },
     editIcon: {
         position: 'absolute',

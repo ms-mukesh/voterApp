@@ -31,7 +31,7 @@ import {
   headerColorArray,
   isANDROID,
   screenWidth,
-  isIOS,
+  isIOS, IsIOSOS, IsAndroidOS,
 } from '../../helper/themeHelper';
 import {center} from '../../helper/styles';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -41,7 +41,7 @@ import {CustomText} from '../common';
 import {useSafeArea} from 'react-native-safe-area-context';
 import {ADMIN, GENDER} from '../../helper/constant';
 import menu_icon from '../../assets/images/menu.png'
-import {add_file_icon, add_user_icon, app_icon, back_arrow_icon} from '../../assets/images'
+import {add_file_icon, add_user_icon, app_icon, back_arrow_icon, filter_icon} from '../../assets/images'
 import {useSelector} from "react-redux";
 
 const InitialHeader = props => {
@@ -151,7 +151,7 @@ const InitialHeader = props => {
             <TouchableOpacity onPress={props.RightPress}>
               <Text
                 allowFontScaling={false}
-                style={{marginLeft:wp(85),alignSelf:'flex-end',fontSize: normalize(20), color: color.white, textAlign: 'center'}}>
+                style={{alignSelf:'flex-end',fontSize: normalize(20), color: color.white, textAlign: 'center'}}>
                 {props?.RightTitle??'Save'}
               </Text>
             </TouchableOpacity>
@@ -299,7 +299,7 @@ const AppHeader = props => {
       forceInset={{top: 'always', bottom: 'never'}}>
       <View style={container}>
         <TouchableOpacity onPress={onMenuPress}>
-          <Image source={menu_icon} style={{height:hp(6),width:hp(6),color:'white'}}/>
+          <Image source={menu_icon} style={{height:(IsIOSOS || IsAndroidOS)?hp(3):hp(6),width:(IsIOSOS || IsAndroidOS)?hp(3):hp(6),color:'white'}}/>
         </TouchableOpacity>
         <Text
           allowFontScaling={false}
@@ -316,7 +316,7 @@ const AppHeader = props => {
         </Text>
         {onRightTitlePress !== null && displayIcon && userDetails?.role === ADMIN &&
         <TouchableOpacity onPress={onRightTitlePress}>
-          <Image style={{height: hp(3.5), width: hp(3.5)}} source={add_file_icon}/>
+          <Image style={{height: (IsIOSOS || IsAndroidOS)?hp(3):hp(5), width: (IsIOSOS || IsAndroidOS)?hp(3):hp(5)}} source={add_file_icon}/>
         </TouchableOpacity>
         }
         {rightTitleFlag &&
@@ -325,12 +325,12 @@ const AppHeader = props => {
         }
         {onExportPress && typeof onExportPress !== 'undefined' && (
           <TouchableOpacity onPress={onExportPress}>
-            <Fontisto name={'export'} size={hp(3.5)} color={color.white} />
+            <Fontisto name={'export'} size={hp(5)} color={color.white} />
           </TouchableOpacity>
         )}
         {onFilterIconPress && typeof onFilterIconPress !== 'undefined' && (
           <TouchableOpacity onPress={onFilterIconPress}>
-            <Feather name={'filter'} size={hp(4)} color={color.white} />
+            <Image style={{height: (IsIOSOS || IsAndroidOS)?hp(3):hp(5), width:(IsIOSOS || IsAndroidOS)?hp(3): hp(5),marginLeft:wp(1)}} source={filter_icon}/>
           </TouchableOpacity>
         )}
         {onSortIconPress && typeof onSortIconPress !== 'undefined' && (
@@ -552,7 +552,7 @@ const GoBackHeader = props => {
 
 const style = StyleSheet.create({
   container: {
-    height: hp(12),
+    height: (IsIOSOS || IsAndroidOS)?hp(8):hp(12),
     backgroundColor: color.themePurple,
     ...center,
     flexDirection: 'row',

@@ -3,7 +3,7 @@ import {View, Text, TouchableWithoutFeedback, StyleSheet, TouchableHighlight, Im
 import {AppButton, AppHeader, Loading} from "../common";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllVolunteer} from "../../redux/actions/eventActions";
-import {color, hp, isANDROID, isWEB, normalize, wp} from "../../helper/themeHelper";
+import {color, hp, isANDROID, IsAndroidOS, IsIOSOS, isWEB, normalize, wp} from "../../helper/themeHelper";
 import {SwipeListView} from "react-native-swipe-list-view";
 import {shadowStyle} from "../../helper/styles";
 import moment from 'moment'
@@ -66,7 +66,7 @@ const SurveyList = props => {
                 displayDetailPage(index)
             }}>
                 <View style={{flex: 1, marginBottom: hp(1)}}>
-                    <View style={[style.mainView,{width:wp(40)}]}>
+                    <View style={[style.mainView,{width:(IsIOSOS || IsAndroidOS)?wp(90):wp(30)}]}>
                         <View style={{flex: 1, flexDirection: 'row'}}>
 
                             <View style={{flex: 1, justifyContent: 'space-between'}}>
@@ -157,14 +157,14 @@ const SurveyList = props => {
             {userDetails.role === ADMIN &&
             <AppButton onPress={() => {
                 props.navigation.navigate('CreateNewSurvey')
-            }} containerStyle={{marginTop: hp(2), backgroundColor: '#ff6d5e'}} title={'Create New Survey'}/>
+            }} containerStyle={{marginTop: hp(2), width:(IsIOSOS || IsAndroidOS)?wp(60):wp(35),backgroundColor: '#ff6d5e'}} title={'Create New Survey'}/>
             }
             <SwipeListView
                 directionalDistanceChangeThreshold={10}
                 useFlatList={true}
                 listViewRef={flatlistRef}
                 data={surveyList}
-                numColumns={2}
+                numColumns={(IsIOSOS || IsAndroidOS)?1:3}
                 keyExtractor={(item, index) => index.toString()}
                 recalculateHiddenLayout={true}
                 renderItem={({item, index}) => _RenderItem(item, index)}
@@ -232,7 +232,7 @@ const style = StyleSheet.create({
         elevation: 10,
     },
     subText: {
-        fontSize: normalize(12),
+        fontSize: normalize(8),
     },
     common: {
         flexDirection: 'row',
@@ -240,7 +240,7 @@ const style = StyleSheet.create({
     },
     fontStyle: {
         color: color.blue,
-        fontSize: normalize(10),
+        fontSize: normalize(8),
         // fontFamily: font.robotoRegular,
         marginLeft: wp(2),
         fontWeight: 'bold',
@@ -279,11 +279,11 @@ const style = StyleSheet.create({
         borderRadius: wp(2),
     },
     iconStyle: {
-        width: wp(4.0),
-        height: wp(4.0),
+        width: wp(2.0),
+        height: wp(2.0),
     },
     sortLabel: {
-        fontSize: normalize(15),
+        fontSize: normalize(12),
         color: '#414141',
         fontWeight: 'bold',
     },

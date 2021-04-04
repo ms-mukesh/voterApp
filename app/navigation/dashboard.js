@@ -9,6 +9,11 @@ import Notification from '../navigation/notification'
 import ChangePassword from '../screen/authentication/changePassword'
 import SurveyList from '../navigation/survey';
 import Election from '../navigation/electionForVolunteer';
+import FamilyTreeScreen from "../screen/home/familyTree";
+import VolunteerChanges from "../screen/admin/volunteerChanges";
+import EventCalender from "../screen/Event/EventCalender";
+import AllocateTask from "../screen/Event/allocateTask";
+import IncluencerList from "../screen/home/incluencerMembers";
 
 
 const Stack = createStackNavigator();
@@ -18,7 +23,7 @@ const App = (props) => {
 
     return (
         <Stack.Navigator initialRouteName="Dashboard" screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Dashboard" component={Dashboard} />
+            <Stack.Screen name="Dashboard"  component={Dashboard} />
             <Stack.Screen name="VoterList" component={VoterList} />
             <Stack.Screen name="Notification" component={Notification} />
             <Stack.Screen name="Volunteer" component={Volunteer} />
@@ -26,6 +31,11 @@ const App = (props) => {
             <Stack.Screen name="SurveyList" component={SurveyList} />
             <Stack.Screen name="Election" component={Election} />
             <Stack.Screen name="ChangePassword" component={ChangePassword} />
+            <Stack.Screen name="FamilyTreeScreen" component={FamilyTreeScreen} />
+            <Stack.Screen name="VolunteerChanges" component={VolunteerChanges} />
+            <Stack.Screen name="EventCalender" component={EventCalender} />
+            <Stack.Screen name="AllocateTask" component={AllocateTask} />
+            <Stack.Screen name="IncluencerList" component={IncluencerList} />
         </Stack.Navigator>
 
     );

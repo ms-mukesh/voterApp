@@ -1,11 +1,13 @@
 import React,{useEffect,useState} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity, TouchableWithoutFeedback, StyleSheet} from 'react-native';
-import {AppButton, AppHeader, FamilyListModel, Loading} from "../common";
+import {AppButton, AppHeader, FamilyListModel, GoBackHeader, Loading} from "../common";
 import {useDispatch, useSelector} from "react-redux";
 import {getFamilyWiseMembers} from "../../redux/actions/userActions";
-import {color, hp, isANDROID, isWEB, normalize, wp} from "../../helper/themeHelper";
+import {color, hp, isANDROID, IsAndroidOS, IsIOSOS, isWEB, normalize, wp} from "../../helper/themeHelper";
 import {getFamilyTreeInformation} from "../../redux/actions/dashboardAction";
+import {isDefined} from "../functions";
 const FamilyTreeScreen = props => {
+    const {fromDashBoard = false} = props?.route?.params
     const dispatch = useDispatch()
     const isLoading = useSelector(state => state.appDefaultSettingReducer.isLoading);
     const familyListArray = useSelector(state => state.dashboardReducer.familyListArray);
@@ -25,6 +27,10 @@ const FamilyTreeScreen = props => {
             }
         })
     }
+    // const [requireGoBackHeader,setRequireGoBackHeader] = useState(false)
+    // useEffect(()=>{
+    //     isDefined(props?.route?.params?.fromDashBoard)?setRequireGoBackHeader(true):setRequireGoBackHeader(false)
+    // },[])
     useEffect(()=>{
         dispatch(getFamilyWiseMembers()).then(async (res)=>{
             if(res){
@@ -36,7 +42,7 @@ const FamilyTreeScreen = props => {
 
     const renderFamilyTree = ({item, index}) => {
         return (
-            <View key={Math.random() + 'DE'} style={{flex: 1,marginTop:hp(2),alignItems:'center',padding:hp(1),backgroundColor:color.lightGreen,borderRadius:hp(2),marginLeft:wp(3),marginRight:wp(3)}}>
+            <View key={Math.random() + 'DE'} style={{flex: 1,width:(IsIOSOS || IsAndroidOS)?wp(65):wp(40),alignSelf:'center',marginTop:hp(2),alignItems:'center',padding:hp(1),backgroundColor:color.lightGreen,borderRadius:hp(2),marginLeft:wp(3),marginRight:wp(3)}}>
                 <View style={{flexDirection:'row'}}>
                     <Text style={styles.familyTreeText}>{item?.FirstName.toUpperCase()}<Text>{item?.Gender==="male"?" (male) ":" (female) "}</Text></Text>
                     {item?.FatherEntry &&
@@ -75,7 +81,7 @@ const FamilyTreeScreen = props => {
                         updateVoterFamilyId(item[0])
                         // closeFamilyModal()
                     }} style={{flex:2,alignItems:'center',justifyContent:'center'}}>
-                        <View style={{alignItems:'center',justifyContent:'center',backgroundColor:color.themePurple,borderRadius:wp(1.5),height:isWEB?hp(5):hp(3),width:isWEB?wp(10):wp(18),alignSelf:'center',justifySelf:'center'}}>
+                        <View style={{alignItems:'center',justifyContent:'center',backgroundColor:color.themePurple,borderRadius:wp(1.5),height:isWEB?hp(5):hp(3),width:(IsIOSOS || IsAndroidOS)?wp(15):wp(10),alignSelf:'center',justifySelf:'center'}}>
                             <Text style={{fontSize:normalize(12),fontWeight:'500',color:color.white}}>SELECT</Text>
                         </View>
                     </TouchableWithoutFeedback>
@@ -88,15 +94,20 @@ const FamilyTreeScreen = props => {
 
     return (
         <View style={{flex: 1}}>
-
-            {/*{familListModelFlag &&*/}
-            {/*<FamilyListModel closeFamilyModal={closeFamilyModal} updateVoterFamilyId={updateVoterFamilyId} familyList={familyList}/>}*/}
+            {/*{!fromDashBoard ?  <AppHeader title={'Family Tree'} onMenuPress={()=>{*/}
+            {/*    props.navigation.openDrawer()*/}
+            {/*}} />:*/}
+            {/*    <GoBackHeader title={'Family Tree'} onMenuPress={()=>{*/}
+            {/*        props.navigation.goBack()*/}
+            {/*    }} />*/}
+            {/*}*/}
             <AppHeader title={'Family Tree'} onMenuPress={()=>{
                 props.navigation.openDrawer()
             }} />
+
             <View style={{height:hp(2)}}/>
             {familListModelFlag &&
-            <AppButton title={'Select Another Family'} onPress={() => {
+            <AppButton containerStyle={{width:(IsIOSOS || IsAndroidOS)?wp(50):wp(35)}} title={'Select Another Family'} onPress={() => {
                 setFamilyListModelFlag(false)
             }}/>
             }

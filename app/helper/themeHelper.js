@@ -1,10 +1,14 @@
 import {Dimensions, PixelRatio, Platform} from 'react-native';
 
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
+import * as Device from "expo-device";
 
 const isIOS = Platform.OS === 'ios';
 const isANDROID = Platform.OS === 'android';
 const isWEB = Platform.OS === 'web';
+const IsIOSOS =Device.osName.toString().toLowerCase() === 'ios'
+const IsAndroidOS =Device.osName.toString().toLowerCase() === 'android'
+const IsWebIOS =Device.osName.toString().toLowerCase() === 'web'
 
 const isiPAD = SCREEN_HEIGHT / SCREEN_WIDTH < 1.6;
 
@@ -26,7 +30,7 @@ const heightPercentageToDP = hp => {
 };
 
 // based on iphone 5s's scale
-const scale = isWEB?SCREEN_HEIGHT/375:SCREEN_WIDTH / 375;
+const scale = isWEB && !IsAndroidOS && !IsIOSOS ? SCREEN_HEIGHT / 525 : SCREEN_WIDTH / 375;
 
 const normalize = size => {
   const newSize = size * scale;
@@ -74,5 +78,7 @@ export {
   color,
   font,
   headerColorArray,
-    isWEB
+    isWEB,
+    IsIOSOS,
+    IsAndroidOS
 };

@@ -245,6 +245,8 @@ const CreateNewSurveyScreen = props => {
                             'surveyName',
                             true
                         )}
+
+
                     </View>
                 </View>
                 <View style={[style.groupView]}>
@@ -274,20 +276,6 @@ const CreateNewSurveyScreen = props => {
                             onChangeText={(e) => dateTimeInputChangeHandler(e)}
                             value={surveyData.startDate}
                         />
-                    </View>
-                </View>
-                <View style={[style.groupView]}>
-                    <View style={[style.innerView]}>
-                        <View
-                            style={{
-                                ...style.iconContainer,
-                                marginBottom: 0,
-                                borderBottomWidth: 1,
-                                borderBottomColor: color.gray,
-                                paddingVertical: hp(1),
-                            }}>
-                            {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                        </View>
                         <TextInput
                             keyboardType="number-pad"
                             style={{
@@ -305,6 +293,7 @@ const CreateNewSurveyScreen = props => {
                         />
                     </View>
                 </View>
+
                 <View style={[style.groupView]}>
                     <View style={[style.innerView]}>
                         <View
@@ -330,7 +319,7 @@ const CreateNewSurveyScreen = props => {
                 </View>
                 <AppButton onPress={()=>{
                     saveSurveyToDb()
-                }} containerStyle={{marginTop:hp(2)}} title={'Add'}/>
+                }} containerStyle={{marginTop:hp(2),width:wp(30)}} title={'Add'}/>
             </KeyboardAwareScrollView>
         )
     }

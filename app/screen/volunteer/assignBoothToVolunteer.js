@@ -3,7 +3,7 @@ import {View, Text, TouchableWithoutFeedback, StyleSheet, TouchableOpacity,Linki
 import {AppHeader, Loading} from "../common";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchAllVolunteer} from "../../redux/actions/eventActions";
-import {color, hp, isANDROID, normalize, wp} from "../../helper/themeHelper";
+import {color, hp, isANDROID, IsAndroidOS, IsIOSOS, normalize, wp} from "../../helper/themeHelper";
 import {SwipeListView} from "react-native-swipe-list-view";
 import {shadowStyle} from "../../helper/styles";
 import moment from "../home/dashboard";
@@ -74,7 +74,8 @@ const AssignBoothToVolunteer = props => {
         return (
             <TouchableWithoutFeedback onPress={()=>{displayDetailPage(index)}}>
             <View style={{flex: 1, marginBottom: hp(1)}}>
-                <View style={[style.mainView,{width:wp(30)}]}>
+
+                <View style={[style.mainView,{width:(IsIOSOS || IsAndroidOS)?wp(90):wp(30)}]}>
                     <View style={{flex: 1, flexDirection: 'row'}}>
                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
                             {typeof item.ProfileImage === 'undefined' ||
@@ -251,7 +252,7 @@ const AssignBoothToVolunteer = props => {
                 useFlatList={true}
                 listViewRef={flatlistRef}
                 data={volunteerList}
-                numColumns={3}
+                numColumns={(IsIOSOS || IsAndroidOS)?1:3}
                 keyExtractor={(item, index) => index.toString()}
                 recalculateHiddenLayout={true}
                 renderItem={({item, index}) => _RenderItem(item, index)}

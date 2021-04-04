@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     // fontSize: normalize(15),
     fontWeight: 'bold',
     alignSelf: 'flex-end',
-    marginRight: wp(6),
+    marginRight: wp(1),
   },
   imgView: {
     height: hp(45),

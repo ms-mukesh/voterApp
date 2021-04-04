@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import {AppButton, AppHeader, GoBackHeader, LabelInputText, Loading} from "../common";
-import {color, hp, normalize, wp} from "../../helper/themeHelper";
+import {color, hp, IsAndroidOS, IsIOSOS, normalize, wp} from "../../helper/themeHelper";
 import {
     address_location_pin, city_icon,
     complete_task_icon,
@@ -156,7 +156,7 @@ const style = StyleSheet.create({
     },
     listBtn:{
      height:hp(6),
-        width:wp(15),
+        width:(IsIOSOS || IsAndroidOS)?wp(20):wp(15),
         borderRadius:hp(0.8),
         backgroundColor:'orange',
         alignItems: 'center',

@@ -1,6 +1,6 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {wp} from '../../helper/themeHelper';
+import {IsAndroidOS, IsIOSOS, wp} from '../../helper/themeHelper';
 const Drawer = createDrawerNavigator();
 import DashBoard from '../homeScreen'
 import AddVoter from '../../screen/NewVoter/addNewVoter'
@@ -37,7 +37,7 @@ const DrawerNavigation = props => {
     return (
         <Drawer.Navigator
             drawerContent={props => <DrawerContent {...props} params={params} />}
-            drawerStyle={{width: wp(40)}}
+            drawerStyle={{width: (IsIOSOS || IsAndroidOS)?wp(60):wp(30)}}
             backBehavior={'initialRoute'}
             initialRouteName={'DashboardScreen'}
             openByDefault={false}

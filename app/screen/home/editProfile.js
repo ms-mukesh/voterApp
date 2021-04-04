@@ -92,6 +92,7 @@ const EditProfile = props => {
     }
     const dateTimeInputChangeHandler = (e) => {
         // this.type = 'text';
+        setIsDobChanged(true)
         var input = e;
         var expr = new RegExp(/\D\/$/);
         if (expr.test(input)) input = input.substr(0, input.length - 3);
@@ -778,7 +779,7 @@ const EditProfile = props => {
                         }}
                     />
 
-                    {/*{renderCameraIcon()}*/}
+                    {renderCameraIcon()}
                 </View>
                 <AnimatedTitle scrollY={scrollY}>
                     <Text allowFontScaling={false} style={style.fontStyle}>
@@ -829,14 +830,15 @@ const EditProfile = props => {
         return (
             <Animated.View
                 style={{
-                    right: iconRightPosition,
+                    // right: iconRightPosition,
                     bottom: iconTopPosition,
                     borderRadius: _getIconWidth,
                     backgroundColor: color.lightBlue,
                     height: _getIconWidth,
                     width: _getIconWidth,
-                    alignSelf: 'center',
                     position: 'absolute',
+                    marginLeft:wp(52)
+
                 }}>
                 <TouchableOpacity
                     style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
@@ -1086,67 +1088,37 @@ const EditProfile = props => {
                                                 '',
                                                 false
                                             )}
-                                            {
-                                                User?.MaritalStatuses?.toString()?.toLowerCase()==='married' &&
-                                                <View style={[style.textInputContainer, {borderBottomColor: color.gray}]}>
-                                                    <View style={style.iconContainer}>
-                                                        {/*<MaterialIcons name={'date-range'} size={hp(2)} color={color.blue} />*/}
-                                                    </View>
 
-                                                    <View style={{flex: 1}}>
-                                                        <TouchableOpacity
-                                                            onPress={() => {
-                                                                _setDateForDatePicker('MarriageDate');
-                                                                setIsShowDatePicker(true);
-                                                            }}
-                                                            style={{flex: 1}}>
-                                                            <FloatingLabel
-                                                                onFocus={() => {
-                                                                    _setDateForDatePicker('MarriageDate');
-                                                                    Keyboard.dismiss();
-                                                                    setIsShowDatePicker(true);
-                                                                }}
-                                                                inputStyle={style.floatingInputStyle}
-                                                                style={style.floatingStyle}
-                                                                label={'Marriage Date' + ' '}
-                                                                value={User && User?.MarriageDate!=='-' ?moment(User?.MarriageDate).format("YYYY-MM-DD") : moment(new Date().toDateString()).format("YYYY-MM-DD")}
-                                                                editable={isANDROID ? false : true}
-                                                            />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                </View>
-                                            }
+                                            {/*{*/}
+                                            {/*    User?.MaritalStatuses?.toString()?.toLowerCase()==='widow' &&*/}
+                                            {/*    <View style={[style.textInputContainer, {borderBottomColor: color.gray}]}>*/}
+                                            {/*        <View style={style.iconContainer}>*/}
+                                            {/*            /!*<MaterialIcons name={'date-range'} size={hp(2)} color={color.blue} />*!/*/}
+                                            {/*        </View>*/}
 
-                                            {
-                                                User?.MaritalStatuses?.toString()?.toLowerCase()==='widow' &&
-                                                <View style={[style.textInputContainer, {borderBottomColor: color.gray}]}>
-                                                    <View style={style.iconContainer}>
-                                                        {/*<MaterialIcons name={'date-range'} size={hp(2)} color={color.blue} />*/}
-                                                    </View>
-
-                                                    <View style={{flex: 1}}>
-                                                        <TouchableOpacity
-                                                            onPress={() => {
-                                                                _setDateForDatePicker('MarriageDate');
-                                                                setIsShowDatePicker(true);
-                                                            }}
-                                                            style={{flex: 1}}>
-                                                            <FloatingLabel
-                                                                onFocus={() => {
-                                                                    _setDateForDatePicker('MarriageDate');
-                                                                    Keyboard.dismiss();
-                                                                    setIsShowDatePicker(true);
-                                                                }}
-                                                                inputStyle={style.floatingInputStyle}
-                                                                style={style.floatingStyle}
-                                                                label={'Marriage Date' + ' '}
-                                                                value={User && User.MarriageDate}
-                                                                editable={isANDROID ? false : true}
-                                                            />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                </View>
-                                            }
+                                            {/*        <View style={{flex: 1}}>*/}
+                                            {/*            <TouchableOpacity*/}
+                                            {/*                onPress={() => {*/}
+                                            {/*                    _setDateForDatePicker('MarriageDate');*/}
+                                            {/*                    setIsShowDatePicker(true);*/}
+                                            {/*                }}*/}
+                                            {/*                style={{flex: 1}}>*/}
+                                            {/*                <FloatingLabel*/}
+                                            {/*                    onFocus={() => {*/}
+                                            {/*                        _setDateForDatePicker('MarriageDate');*/}
+                                            {/*                        Keyboard.dismiss();*/}
+                                            {/*                        setIsShowDatePicker(true);*/}
+                                            {/*                    }}*/}
+                                            {/*                    inputStyle={style.floatingInputStyle}*/}
+                                            {/*                    style={style.floatingStyle}*/}
+                                            {/*                    label={'Marriage Date' + ' '}*/}
+                                            {/*                    value={User && User.MarriageDate}*/}
+                                            {/*                    editable={isANDROID ? false : true}*/}
+                                            {/*                />*/}
+                                            {/*            </TouchableOpacity>*/}
+                                            {/*        </View>*/}
+                                            {/*    </View>*/}
+                                            {/*}*/}
 
                                         </View>
                                     </View>

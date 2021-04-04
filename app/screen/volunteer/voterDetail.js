@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import {CommonActions} from '@react-navigation/native';
 import {AppButton, AppHeader, FloatingLabel, GoBackHeader, Loading, SelectFamilyModal} from "../common";
-import {color, normalize, hp, wp, isANDROID, isIOS} from "../../helper/themeHelper";
+import {color, normalize, hp, wp, isANDROID, isIOS, IsIOSOS, IsAndroidOS} from "../../helper/themeHelper";
 import {useSafeArea} from "react-native-safe-area-context";
 import {useDispatch, useSelector} from "react-redux";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -258,7 +258,7 @@ const VoterDetail = props => {
     const renderRadioButtonForAlive = (title,firstValue,secondValue) => {
         return (
             <View style={[style.alignRow,  {flex: 1}]}>
-                <Text style={{marginLeft:wp(2),fontSize:normalize(15),alignSelf:'center',color:color.themePurple}}>{title}</Text>
+                <Text style={{marginLeft:wp(2),fontSize:normalize(12),alignSelf:'center',color:color.themePurple}}>{title}</Text>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
                         setIsAlive(true)
@@ -269,7 +269,7 @@ const VoterDetail = props => {
                             }
                         </View>
                     </TouchableWithoutFeedback>
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{firstValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{firstValue}</Text>
                 </View>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
@@ -281,7 +281,7 @@ const VoterDetail = props => {
                             }
                         </View>
                     </TouchableWithoutFeedback>
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{secondValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{secondValue}</Text>
                 </View>
             </View>
         );
@@ -325,7 +325,7 @@ const VoterDetail = props => {
     const renderRadioButtonForGender = (title,firstValue,secondValue) => {
         return (
             <View style={[style.alignRow,  {flex: 1}]}>
-                <Text style={{marginLeft:wp(2),fontSize:normalize(15),alignSelf:'center',color:color.themePurple}}>{title}</Text>
+                <Text style={{marginLeft:wp(2),fontSize:normalize(12),alignSelf:'center',color:color.themePurple}}>{title}</Text>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
                         setGenderCheck(true)
@@ -336,20 +336,20 @@ const VoterDetail = props => {
                             }
                         </View>
                     </TouchableWithoutFeedback>
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{firstValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{firstValue}</Text>
                 </View>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
                         setGenderCheck(false)}}>
 
-                        <View style={[style.radioButtonOutterCircle,{marginLeft:wp(4)}]}>
+                        <View style={[style.radioButtonOutterCircle,{marginLeft:wp(2)}]}>
                             {!genderCheck &&
                             <View style={style.radioButtonInnerCircle}/>
                             }
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{secondValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{secondValue}</Text>
                 </View>
             </View>
         );
@@ -357,7 +357,7 @@ const VoterDetail = props => {
     const renderRadioButtonForInfluencer = (title,firstValue,secondValue) => {
         return (
             <View style={[style.alignRow,  {flex: 1}]}>
-                <Text style={{marginLeft:wp(2),fontSize:normalize(15),alignSelf:'center',color:color.themePurple}}>{title}</Text>
+                <Text style={{marginLeft:wp(2),fontSize:normalize(12),alignSelf:'center',color:color.themePurple}}>{title}</Text>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
                         setInfluencerCheck(true)
@@ -368,7 +368,7 @@ const VoterDetail = props => {
                             }
                         </View>
                     </TouchableWithoutFeedback>
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{firstValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{firstValue}</Text>
                 </View>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
@@ -381,7 +381,7 @@ const VoterDetail = props => {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{secondValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{secondValue}</Text>
                 </View>
             </View>
         );
@@ -389,7 +389,7 @@ const VoterDetail = props => {
     const renderRadioButtonForTrustFactor = (title,firstValue,secondValue,thirdValue,fourthValue,fifthValue) => {
         return (
             <View style={[style.alignRow,  {flex: 1,flexDirection:'column'}]}>
-                <Text style={{marginLeft:wp(2),fontSize:normalize(15),alignSelf:'center',color:color.themePurple}}>{title}</Text>
+                <Text style={{marginLeft:wp(2),fontSize:normalize(12),alignSelf:'center',color:color.themePurple}}>{title}</Text>
                 <View style={style.trustFactorRow}>
                     <TouchableWithoutFeedback onPress={()=>{
                         setVoterTrustFactor(TRUST_FACTOR.ourSupport)
@@ -401,7 +401,7 @@ const VoterDetail = props => {
                             }
                         </View>
                     </TouchableWithoutFeedback>
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{firstValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{firstValue}</Text>
                 </View>
                 <View style={style.trustFactorRow}>
                     <TouchableWithoutFeedback onPress={()=>{
@@ -415,7 +415,7 @@ const VoterDetail = props => {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{secondValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{secondValue}</Text>
                 </View>
                 <View style={style.trustFactorRow}>
                     <TouchableWithoutFeedback onPress={()=>{
@@ -429,7 +429,7 @@ const VoterDetail = props => {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{thirdValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{thirdValue}</Text>
                 </View>
                 <View style={style.trustFactorRow}>
                     <TouchableWithoutFeedback onPress={()=>{
@@ -443,7 +443,7 @@ const VoterDetail = props => {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{fourthValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{fourthValue}</Text>
                 </View>
                 <View style={style.trustFactorRow}>
                     <TouchableWithoutFeedback onPress={()=>{
@@ -457,7 +457,7 @@ const VoterDetail = props => {
                         </View>
                     </TouchableWithoutFeedback>
 
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{fifthValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{fifthValue}</Text>
                 </View>
             </View>
         );
@@ -465,7 +465,7 @@ const VoterDetail = props => {
     const renderRadioButtonForVolunteer = (title,firstValue,secondValue) => {
         return (
             <View style={[style.alignRow,  {flex: 1}]}>
-                <Text style={{marginLeft:wp(2),fontSize:normalize(15),alignSelf:'center',color:color.themePurple}}>{title}</Text>
+                <Text style={{marginLeft:wp(2),fontSize:normalize(12),alignSelf:'center',color:color.themePurple}}>{title}</Text>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
                         setIsOurVolunteer(true)
@@ -476,7 +476,7 @@ const VoterDetail = props => {
                             }
                         </View>
                     </TouchableWithoutFeedback>
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{firstValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{firstValue}</Text>
                 </View>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                     <TouchableWithoutFeedback onPress={()=>{
@@ -488,7 +488,7 @@ const VoterDetail = props => {
                             }
                         </View>
                     </TouchableWithoutFeedback>
-                    <Text style={{marginLeft:wp(2),fontSize:normalize(15),color:color.themePurple}}>{secondValue}</Text>
+                    <Text style={{marginLeft:wp(0.5),fontSize:normalize(10),color:color.themePurple}}>{secondValue}</Text>
                 </View>
             </View>
         );
@@ -702,267 +702,438 @@ const VoterDetail = props => {
         }
     }
 
-    return (
-        <View style={{flex: 1, }}>
-            <GoBackHeader
-                title={'back'}
-                onMenuPress={() => {
-                    props.navigation.goBack();
-                }}
-            />
-            {isLoading && <Loading isLoading={isLoading} />}
-            {familListModelFlag &&
-            <FamilyListModel closeFamilyModal={closeFamilyModal} updateVoterFamilyId={updateVoterFamilyId} familyList={familyList}/>}
-            <KeyboardAwareScrollView
-                keyboardShouldPersistTaps="handled"
-                // contentContainerStyle={{flex: 1}}
-                enableAutomaticScroll={isIOS}
-                scrollEnabled={true}
-                extraScrollHeight={hp(-1)}
-                showsVerticalScrollIndicator={false}>
-                <View style={{flex: 1}}>
-                    <View style={{height:hp(20),alignItems:'center',justifyContent:'center'}}>
-                        <TouchableOpacity style={{height:hp(20),width:hp(20),borderRadius:hp(10)}} onPress={()=>{
-                            openImagePicker()
-                        }}>
-                        {User.profileImage!==null && User.profileImage!=="" ?
-                        <Image resizeMode={'cover'} source={{uri:User?.profileImage}} style={{height:hp(20),width:hp(20),borderRadius:hp(10)}}/>:
-                            <Image resizeMode={'cover'} source={userImage} style={{height:hp(20),width:hp(20),borderRadius:hp(10)}}/>
+    const editDetailFormForWeb = () =>{
+        return(
+            <View style={{flex: 1, }}>
+                <GoBackHeader
+                    title={'back'}
+                    onMenuPress={() => {
+                        props.navigation.goBack();
+                    }}
+                />
+                {isLoading && <Loading isLoading={isLoading} />}
+                {familListModelFlag &&
+                <FamilyListModel closeFamilyModal={closeFamilyModal} updateVoterFamilyId={updateVoterFamilyId} familyList={familyList}/>}
+                <KeyboardAwareScrollView
+                    keyboardShouldPersistTaps="handled"
+                    // contentContainerStyle={{flex: 1}}
+                    enableAutomaticScroll={isIOS}
+                    scrollEnabled={true}
+                    extraScrollHeight={hp(-1)}
+                    showsVerticalScrollIndicator={false}>
+                    <View style={{flex: 1}}>
+                        <View style={{height:hp(20),alignItems:'center',justifyContent:'center'}}>
+                            <TouchableOpacity style={{height:hp(20),width:hp(20),borderRadius:hp(10)}} onPress={()=>{
+                                openImagePicker()
+                            }}>
+                                {User.profileImage!==null && User.profileImage!=="" ?
+                                    <Image resizeMode={'cover'} source={{uri:User?.profileImage}} style={{height:hp(20),width:hp(20),borderRadius:hp(10)}}/>:
+                                    <Image resizeMode={'cover'} source={userImage} style={{height:hp(20),width:hp(20),borderRadius:hp(10)}}/>
+                                }
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {renderNameFloatingTextInput(
+                                    'FIRST NAME',
+                                    User.firstName,
+                                    'firstName',
+                                    true
+                                )}
+                                {renderNameFloatingTextInput(
+                                    'LAST NAME',
+                                    User.lastName,
+                                    'lastName',
+                                    true
+                                )}
+                                {User && renderNameFloatingTextInput( 'EMAIL', User.email, "email", true)}
+                            </View>
+
+
+
+                        </View>
+
+                        {/*<View style={[style.groupView]}>*/}
+                        {/*    <View style={[style.innerView]}>*/}
+                        {/*        <View*/}
+                        {/*            style={{*/}
+                        {/*                ...style.iconContainer,*/}
+                        {/*                marginBottom: 0,*/}
+                        {/*                borderBottomWidth: 1,*/}
+                        {/*                borderBottomColor: color.gray,*/}
+                        {/*                paddingVertical: hp(1),*/}
+                        {/*            }}>*/}
+                        {/*            /!*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*!/*/}
+                        {/*        </View>*/}
+                        {/*        {User && renderNameFloatingTextForDob( 'DOB', moment(User.DOB).format("DD-MM-YYYY"), "DOB", true)}*/}
+                        {/*    </View>*/}
+
+
+
+                        {/*</View>*/}
+
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {User && renderNameFloatingTextInput( 'MOBILE', User?.mobile.toString(), "mobile", true)}
+                                {User && renderNameFloatingTextInput( 'AGE', User?.age.toString(), "age", true)}
+                                { renderNameFloatingTextInputForSelection( 'SELECT FAMILY', voterFamilyId?.toString(), "familyId", true,)}
+                                {User && renderNameFloatingTextInput( 'VOTER ID', User?.voterId.toString(), "voterId", true)}
+                            </View>
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForGender("GENDER","MALE","FEMALE")}
+                            </View>
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForAlive("ALIVE     ","YES","NO")}
+                            </View>
+                        </View>
+                        {userDetails?.role === ADMIN &&
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {renderRadioButtonForVolunteer("OUR VOLUNTEER", "YES", "NO")}
+                            </View>
+                        </View>
                         }
-                        </TouchableOpacity>
-                    </View>
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForInfluencer("OUR INFLUNCER","YES","NO")}
                             </View>
-                            {renderNameFloatingTextInput(
-                                'FIRST NAME',
-                                User.firstName,
-                                'firstName',
-                                true
-                            )}
-                            {renderNameFloatingTextInput(
-                                'LAST NAME',
-                                User.lastName,
-                                'lastName',
-                                true
-                            )}
+
                         </View>
 
-
-
-                    </View>
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForTrustFactor("TRUST FACTOR","IN OUR SUPPORT","NOT IN OUR SUPPORT","CAN BE COVENCE","DOUBT FULL","CAN NOT SAY")}
                             </View>
-                            {User && renderNameFloatingTextInput( 'EMAIL', User.email, "email", true)}
                         </View>
-
-
-
-                    </View>
-                    {/*<View style={[style.groupView]}>*/}
-                    {/*    <View style={[style.innerView]}>*/}
-                    {/*        <View*/}
-                    {/*            style={{*/}
-                    {/*                ...style.iconContainer,*/}
-                    {/*                marginBottom: 0,*/}
-                    {/*                borderBottomWidth: 1,*/}
-                    {/*                borderBottomColor: color.gray,*/}
-                    {/*                paddingVertical: hp(1),*/}
-                    {/*            }}>*/}
-                    {/*            /!*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*!/*/}
-                    {/*        </View>*/}
-                    {/*        {User && renderNameFloatingTextForDob( 'DOB', moment(User.DOB).format("DD-MM-YYYY"), "DOB", true)}*/}
-                    {/*    </View>*/}
-
-
-
-                    {/*</View>*/}
-
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            {User && renderNameFloatingTextInput( 'MOBILE', User?.mobile.toString(), "mobile", true)}
-                        </View>
-                    </View>
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            {User && renderNameFloatingTextInput( 'AGE', User?.age.toString(), "age", true)}
-                        </View>
-                    </View>
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            { renderNameFloatingTextInputForSelection( 'SELECT FAMILY', voterFamilyId?.toString(), "familyId", true,)}
-                        </View>
-
-
-
-                    </View>
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            {User && renderNameFloatingTextInput( 'VOTER ID', User?.voterId.toString(), "voterId", true)}
-                        </View>
-
-
-
-                    </View>
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            { renderRadioButtonForGender("GENDER","MALE","FEMALE")}
-                        </View>
-                    </View>
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            { renderRadioButtonForAlive("ALIVE     ","YES","NO")}
-                        </View>
-                    </View>
-                    {userDetails?.role === ADMIN &&
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            {renderRadioButtonForVolunteer("OUR VOLUNTEER", "YES", "NO")}
-                        </View>
-                    </View>
-                    }
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            { renderRadioButtonForInfluencer("OUR INFLUNCER","YES","NO")}
-                        </View>
-
-                    </View>
-
-                    <View style={[style.groupView]}>
-                        <View style={[style.innerView]}>
-                            <View
-                                style={{
-                                    ...style.iconContainer,
-                                    marginBottom: 0,
-                                    borderBottomWidth: 1,
-                                    borderBottomColor: color.gray,
-                                    paddingVertical: hp(1),
-                                }}>
-                                {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
-                            </View>
-                            { renderRadioButtonForTrustFactor("TRUST FACTOR","IN OUR SUPPORT","NOT IN OUR SUPPORT","CAN BE COVENCE","DOUBT FULL","CAN NOT SAY")}
-                        </View>
-                    </View>
-                    {datePickerFlag && (
-                        <DatePickerModel
-                            _setIsShowDatePicker={_setIsShowDatePicker}
-                            dateForDatePicker={User.DOB}
-                            isShow={datePickerFlag}
-                            _setDateFromKey={_setDateFromKey}
-                            mode={'date'}
+                        {datePickerFlag && (
+                            <DatePickerModel
+                                _setIsShowDatePicker={_setIsShowDatePicker}
+                                dateForDatePicker={User.DOB}
+                                isShow={datePickerFlag}
+                                _setDateFromKey={_setDateFromKey}
+                                mode={'date'}
+                            />
+                        )}
+                        <AppButton
+                            containerStyle={{marginTop:hp(2),width:wp(30)}}
+                            title={userDetails?.role===ADMIN?'SAVE CHANGES':'REQUEST TO CHANGE'}
+                            onPress={() => {
+                                insertChangeVoterRequestToDb()
+                            }}
                         />
-                    )}
-                    <AppButton
-                        containerStyle={{marginTop:hp(2)}}
-                        title={userDetails?.role===ADMIN?'SAVE CHANGES':'REQUEST TO CHANGE'}
-                        onPress={() => {
-                            insertChangeVoterRequestToDb()
-                        }}
-                    />
-                    <View style={{height:hp(5)}}/>
-                </View>
-            </KeyboardAwareScrollView>
-        </View>
-    );
+                        <View style={{height:hp(5)}}/>
+                    </View>
+                </KeyboardAwareScrollView>
+            </View>
+        )
+    }
+    const editDetailFormForWebForMobile = () =>{
+        return(
+            <View style={{flex: 1, }}>
+                <GoBackHeader
+                    title={'back'}
+                    onMenuPress={() => {
+                        props.navigation.goBack();
+                    }}
+                />
+                {isLoading && <Loading isLoading={isLoading} />}
+                {familListModelFlag &&
+                <FamilyListModel closeFamilyModal={closeFamilyModal} updateVoterFamilyId={updateVoterFamilyId} familyList={familyList}/>}
+                <KeyboardAwareScrollView
+                    keyboardShouldPersistTaps="handled"
+                    // contentContainerStyle={{flex: 1}}
+                    enableAutomaticScroll={isIOS}
+                    scrollEnabled={true}
+                    extraScrollHeight={hp(-1)}
+                    showsVerticalScrollIndicator={false}>
+                    <View style={{flex: 1}}>
+                        <View style={{height:hp(20),alignItems:'center',justifyContent:'center'}}>
+                            <TouchableOpacity style={{height:hp(20),width:hp(20),borderRadius:hp(10)}} onPress={()=>{
+                                openImagePicker()
+                            }}>
+                                {User.profileImage!==null && User.profileImage!=="" ?
+                                    <Image resizeMode={'cover'} source={{uri:User?.profileImage}} style={{height:hp(20),width:hp(20),borderRadius:hp(10)}}/>:
+                                    <Image resizeMode={'cover'} source={userImage} style={{height:hp(20),width:hp(20),borderRadius:hp(10)}}/>
+                                }
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {renderNameFloatingTextInput(
+                                    'FIRST NAME',
+                                    User.firstName,
+                                    'firstName',
+                                    true
+                                )}
+                                {renderNameFloatingTextInput(
+                                    'LAST NAME',
+                                    User.lastName,
+                                    'lastName',
+                                    true
+                                )}
+                            </View>
+
+
+
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {User && renderNameFloatingTextInput( 'EMAIL', User.email, "email", true)}
+                            </View>
+
+
+
+                        </View>
+
+
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {User && renderNameFloatingTextInput( 'MOBILE', User?.mobile.toString(), "mobile", true)}
+                            </View>
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {User && renderNameFloatingTextInput( 'AGE', User?.age.toString(), "age", true)}
+                            </View>
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {User && renderNameFloatingTextInput( 'VOTER ID', User?.voterId.toString(), "voterId", true)}
+                            </View>
+
+
+
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForGender("GENDER","MALE","FEMALE")}
+                            </View>
+                        </View>
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForAlive("ALIVE     ","YES","NO")}
+                            </View>
+                        </View>
+                        {userDetails?.role === ADMIN &&
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                {renderRadioButtonForVolunteer("OUR VOLUNTEER", "YES", "NO")}
+                            </View>
+                        </View>
+                        }
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForInfluencer("OUR INFLUNCER","YES","NO")}
+                            </View>
+
+                        </View>
+
+                        <View style={[style.groupView]}>
+                            <View style={[style.innerView]}>
+                                <View
+                                    style={{
+                                        ...style.iconContainer,
+                                        marginBottom: 0,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: color.gray,
+                                        paddingVertical: hp(1),
+                                    }}>
+                                    {/*<EvilIconsIcon name={'user'} size={hp(3.3)} color={color.blue} />*/}
+                                </View>
+                                { renderRadioButtonForTrustFactor("TRUST FACTOR","IN OUR SUPPORT","NOT IN OUR SUPPORT","CAN BE COVENCE","DOUBT FULL","CAN NOT SAY")}
+                            </View>
+                        </View>
+                        {datePickerFlag && (
+                            <DatePickerModel
+                                _setIsShowDatePicker={_setIsShowDatePicker}
+                                dateForDatePicker={User.DOB}
+                                isShow={datePickerFlag}
+                                _setDateFromKey={_setDateFromKey}
+                                mode={'date'}
+                            />
+                        )}
+                        <AppButton
+                            containerStyle={{marginTop:hp(2)}}
+                            title={userDetails?.role===ADMIN?'SAVE CHANGES':'REQUEST TO CHANGE'}
+                            onPress={() => {
+                                insertChangeVoterRequestToDb()
+                            }}
+                        />
+                        <View style={{height:hp(5)}}/>
+                    </View>
+                </KeyboardAwareScrollView>
+            </View>
+        )
+    }
+
+    return(
+        (IsIOSOS || IsAndroidOS)?editDetailFormForWebForMobile():editDetailFormForWeb()
+    )
+    // (IsIOSOS || IsAndroidOS)?editDetailFormForWebForMobile():editDetailFormForWeb()
 };
 const style = StyleSheet.create({
     textStyle: {
